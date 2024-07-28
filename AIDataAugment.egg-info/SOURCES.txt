@@ -1,0 +1,11 @@
+README.md
+setup.py
+AIDataAugment.egg-info/PKG-INFO
+AIDataAugment.egg-info/SOURCES.txt
+AIDataAugment.egg-info/dependency_links.txt
+AIDataAugment.egg-info/requires.txt
+AIDataAugment.egg-info/top_level.txt
+TextAugmentor/TextAugmentor.py
+TextAugmentor/__init__.py
+tests/TextAugmentor_load_data_test.py
+tests/__init__.py
