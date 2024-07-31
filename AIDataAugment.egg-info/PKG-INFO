@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: AIDataAugment
-Version: 0.1.1
+Version: 1.1.0
 Summary: A Python package for efficient and customizable text augmentation for NLP tasks.
 Home-page: https://github.com/FaroukDaboussi0/AIDataAugment
 Author: Farouk Daboussi
@@ -49,7 +49,8 @@ pip install AIDataAugment
 1. **Initializing TextAugmentor:**
 
     ```python
-    from TextAugmentor import TextAugmentor
+    from AIDataAugment.TextAugmentor import TextAugmentor
+
 
     # Initialize with your API key
     augmentor = TextAugmentor(api_key="YOUR_API_KEY")

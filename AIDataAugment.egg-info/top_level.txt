@@ -1,2 +1,2 @@
-TextAugmentor
+AIDataAugment
 tests
