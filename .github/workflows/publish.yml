@@ -27,5 +27,12 @@ jobs:
       - name: Build package
         run: |
           python setup.py sdist bdist_wheel  # Could also be python -m build
+      - name: Print GitHub context
+        run: echo '${{ toJSON(github) }}'
+      - name: Print environment variables
+        run: env
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: pypi-AgENdGVzdC5weXBpLm9yZwIkNmE4NjU1MDgtODYwOS00MTBiLWFlZjUtYTY4NWM2MDg0YTY4AAIqWzMsIjcyMWNlODQ3LWVmYmEtNGMzZC05ZjUxLWMzMDQ4MjhiMTdlYSJdAAAGILKzy-3fSjMADe_YaPsOh6T4YfQKMjfqYN4NRcuYJXnN
+
