@@ -28,7 +28,7 @@ Before you dive in, To use the Gemini API, you need an API key , head over [here
 Install the necessary packages:
 
 ```bash
-pip install AIDataAugment
+pip install git+https://github.com/FaroukDaboussi0/AIDataAugment
 ```
 
 **Usage:**
