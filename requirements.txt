@@ -2,4 +2,3 @@ google-generativeai
 pandas
 openpyxl
 xlrd
-logging

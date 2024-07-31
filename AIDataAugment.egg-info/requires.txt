@@ -1,4 +1,3 @@
 google-generativeai
 pandas
 openpyxl
-logging

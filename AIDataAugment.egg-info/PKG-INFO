@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: AIDataAugment
-Version: 0.1.0
+Version: 0.1.1
 Summary: A Python package for efficient and customizable text augmentation for NLP tasks.
 Home-page: https://github.com/FaroukDaboussi0/AIDataAugment
 Author: Farouk Daboussi
@@ -48,59 +48,99 @@ pip install AIDataAugment
 
 1. **Initializing TextAugmentor:**
 
-```python
-from TextAugmentor import TextAugmentor
+    ```python
+    from TextAugmentor import TextAugmentor
 
-# Initialize with your API key
-augmentor = TextAugmentor(api_key="YOUR_API_KEY")
-```
+    # Initialize with your API key
+    augmentor = TextAugmentor(api_key="YOUR_API_KEY")
+    ```
 
 2. **Augmenting a Single Text:**
 
-```python
-text = "Your original text goes here."
-augmented_texts = augmentor.augment_string(text, num_augmentations=5, style="standard", language="EN")
-print(augmented_texts)
-```
+    ```python
+    text = "Your original text goes here."
+    augmented_texts = augmentor.augment_string(text, num_augmentations=5, style="standard", language="EN")
+    print(augmented_texts)
+    ```
 
 3. **Augmenting an Entire Dataset:**
-    1. Basic usage exemple :
 
-```python
-import pandas as pd
+    You can use the augmentor to augment data in a dataset from a file or a pandas DataFrame. Supported file formats are CSV, TSV, XLS, and XLSX.
 
-# Load your data
-data = pd.read_csv("your_dataset.csv")
+    1. Using a file path :
 
-# Load your data 
-augmentor.load_data(dataframe=data)
+    ```python
+    from augmentor import augment
 
-augmentor.process_data(
-            column_to_augment="text_column", 
-            total_augmentations=5,
-            style="standard",
-            language="EN")
+    # File path to your dataset
+    file_path = r'Your dataset path.'
 
-# Output file format supported: csv, tsv, Json,  xls and xlsx
-augmentor.save_data("augmented_dataset.csv")
-```
+    # Column that you want to augment
+    column_to_augment = "Example"
 
-2. Additional Features
-```python
-# Input file format supported: csv, tsv, xls and xlsx
-augmentor.load_data(file_path="your_dataset.csv") 
+    # Number of times you want to augment your data
+    total_augmentations = 3
 
-augmentor.process_data(
-        column_to_augment="text_column", 
-        total_augmentations=5,
-        style="creative",  # or " formal" or any style you want
-        language="Ø¹Ø±Ø¨ÙŠØ©"  # Supported languages are many; see Geminy 1.5 Flash documentation
-)
+    # Customize your rephrasing style (default: 'standard')
+    style = 'standard'
 
-df = augmentor.save_data()  # Leave it empty to return a DataFrame
+    # Specify the language for augmentation (default: 'EN')
+    language = 'EN'
 
-```
+    # Output filename for the augmented data
+    output_filename = 'augmented_data.csv'
 
+    # Perform augmentation and save the result to a file
+    augmentor.augment(
+        file_path=file_path,
+        column_to_augment=column_to_augment,
+        total_augmentations=total_augmentations,
+        style=style,
+        language=language,
+        output_filename=output_filename
+    )
+    ```
+
+    2. Using a pandas DataFrame
+    ```python
+    import pandas as pd
+    from augmentor import augment
+
+    # Your pandas DataFrame
+    df = pd.read_csv('your_dataset.csv')
+
+    # Column that you want to augment
+    column_to_augment = "Example"
+
+    # Number of times you want to augment your data
+    total_augmentations = 3
+
+    # Customize your rephrasing style (default: 'standard')
+    style = 'standard'
+
+    # Specify the language for augmentation (default: 'EN')
+    language = 'EN'
+
+    # Perform augmentation and return the augmented DataFrame
+    augmented_df = augmentor.augment(
+        dataframe=df,
+        column_to_augment=column_to_augment,
+        total_augmentations=total_augmentations,
+        style=style,
+        language=language
+    )
+    ```
+    **Parameters**:
+    * **file_path** (str): The path to the dataset file. Supported formats: CSV, TSV, XLS, XLSX.
+    * **dataframe** (pd.DataFrame): The pandas DataFrame containing your data.
+    * **column_to_augment** (str): The column name to augment.
+    * **total_augmentations** (int): The number of times to augment the data.
+    * **style** (str, optional): The rephrasing style (default is 'standard').
+    * **language** (str, optional): The language for augmentation (default is 'EN').
+    * **output_filename** (str, optional): The filename to save the augmented data (only for file-based augmentation).
+
+    **Returns**:
+    * **pd.DataFrame**: A DataFrame containing the augmented data (only for DataFrame-based augmentation).
 ### What Sets TextAugmentor Apart?
 
 * **Simplicity:**  A user-friendly interface for augmenting both individual texts and entire datasets.
