@@ -4,15 +4,15 @@
 
 ### Why Choose TextAugmentor?
 
-In the world of NLP, the golden rule is "more data is better". But let's be real - acquiring and labeling additional data can be a costly and time-consuming endeavor. 
+In the world of NLP, the golden rule is "more data is better." But acquiring and labeling additional data can be costly and time-consuming.
 
-**Enter data augmentation!** TextAugmentor empowers you to generate synthetic text data from your existing dataset, enhancing its richness and diversity.  
+**Enter data augmentation!** TextAugmentor empowers you to generate synthetic text data from your existing dataset, enhancing its richness and diversity.
 
 **Here's how TextAugmentor elevates your NLP game:**
 
 * **Effortless Augmentation:** Augment individual texts or entire datasets with ease.
-* **Bulk Data Handling:** Process large datasets without breaking a sweat.
-* **Customizable Language & Style:** Tailor augmentation to your specific needs - choose the language and style that best suits your project.
+* **Bulk Data Handling:** Process large datasets efficiently, optimized through prompt handling and resume functionality.
+* **Customizable Language & Style:** Tailor augmentation to your specific needs—choose the language and style that best suits your project.
 * **Flexible File Formats:** Import and export data in CSV, TSV, XLS, XLSX, JSON, and DataFrame formats for seamless integration.
 * **Thread-Safe Operations:** Process data safely and efficiently in a multi-threaded environment.
 * **Precise Control:** Specify the number of augmentations (recommended range: 2 to 100) to fine-tune your dataset expansion.

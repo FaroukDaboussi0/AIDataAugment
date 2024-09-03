@@ -15,7 +15,7 @@ class TextAugmentor:
         self.new_rows = []
         self.column_to_augment = None
         self.lock = threading.Lock()  # Initialize a lock for thread safety
-        
+        self.output_df = pd.DataFrame()
         # Set up logging
         self.logger = logging.getLogger(__name__)
         logging.basicConfig(level=logging.INFO)
@@ -207,6 +207,7 @@ class TextAugmentor:
                         self._save_intermediate() 
 
             remaining_augmentations -= num_augmentations
+
     def _build_batch_prompt(self, batch, column_to_augment, total_augmentations):
         texts = "\n".join([
             f'''Text {index+1} : {rowt[column_to_augment]}'''
@@ -226,6 +227,7 @@ class TextAugmentor:
         {output}
         '''
         return prompt
+    
     def __extract_versions_large(self, response, total_augmentations, batch):
         M = []
 
@@ -253,6 +255,7 @@ class TextAugmentor:
             M.append(texts)
 
         return M
+   
     def _process_batch(self, batch, column_to_augment, total_augmentations):
         prompt = self._build_batch_prompt(batch, column_to_augment, total_augmentations)
         response = self._generate_text(prompt)
@@ -268,7 +271,6 @@ class TextAugmentor:
                     self.new_rows.append(new_row)
                     self._save_intermediate() 
                     
-
     def _process_data(self, column_to_augment, total_augmentations, style="standard", language="EN"):
 
         if not self.output_filename:
@@ -286,7 +288,10 @@ class TextAugmentor:
         self.dataframe = self.dataframe.drop(columns='text_length')
         batch = []
         current_batch_char_count = 0
-        index = self._resume_index(self.output_filename) // total_augmentations
+        if self.output_filename is not None :
+            index = self._resume_index(self.output_filename) // total_augmentations
+        else :
+            index = 0
         self.dataframe = self.dataframe.iloc[index:]
 
         for gindex, row in self.dataframe.iterrows():
@@ -316,7 +321,7 @@ class TextAugmentor:
                 batch = [row]
                 current_batch_char_count = text_length
 
-            sys.stdout.write(f"\r{gindex + 1} / {total_rows} rows processed ")
+            sys.stdout.write(f"\r{gindex + 1} / {total_rows} rows processed. wait ")
             sys.stdout.flush()
 
         if batch:
@@ -380,7 +385,10 @@ class TextAugmentor:
             raise ValueError("You can pass either a data frame or a file path, not both.")
         
         if dataframe is not None:
-            self._load_data(dataframe=dataframe)
+            if len(dataframe) != 0 :
+                self._load_data(dataframe=dataframe)
+            else: 
+                raise ValueError("dataframe passed iis empty")
         elif file_path is not None:
             self._load_data(file_path=file_path)
         
